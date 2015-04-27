@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Show Row - A DataTable Plugin</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" type="text/css" href="datatable/jquery.dataTables.min.css">
+		<link rel="stylesheet" type="text/css" href="media/style.css">
+		
+		<script type="text/javascript" src="media/jquery.js"> </script>
+		<script type="text/javascript" src="datatable/jquery.dataTables.min.js"> </script>
+		<script type="text/javascript" src="datatable-show-row-plugin.js"> </script>
+		
+    </head>
+    <body>
+		<div class="content">
+                    <h1>DataTable : show row plugin</h1>
+                    <p>
+                        Some examples of plugin use.
+                        Use the "r_show()"  function chained to the rows API elements like : 
+                    </p>
+                    <pre>
+    var table = jQuery('#example_table').DataTable();
+    table.row( '#row_example' ).r_show();
+                    </pre>
+                    <p>
+                        See the page code for more details.
+                    </p>
+      
+      
+			<button type="button" data-action="show_row" data-rowid="row_4">See row 4</button>
+			<button type="button" data-action="show_row" data-rowid="row_12">See row 12</button>
+			<button type="button" data-action="show_row" data-rowid="row_25">See row 25</button>
+			<button type="button" data-action="show_row" data-rowid="row_37">See row 37</button>
+			<button type="button" data-action="show_row" data-rowid="row_44">See row 44</button>
+			<br/><br/>
+			<button type="button" data-action="add_row">Add a new row</button>
+			&nbsp;
+			<button type="button" data-action="edit_row" data-rowid="row_8">Add 10 to row 8</button>
+			<br/><br/>
+			<table id="example_table" >
+				<thead>
+					<tr>
+						<th>A</th>
+						<th>B</th>
+					</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+		</div>
+		<script>
+			var table_data = [];
+			// Create 50 rows with row id
+			var r = 0;
+			do{
+				table_data.push( {
+					'DT_RowId': 'row_' + r,
+					'a': r,
+					'b' : 'B - ' + r
+				});
+				r++;
+			} while( r < 50 );
+			// Init DataTable
+			var table = jQuery('#example_table').DataTable({
+				data:table_data,
+				columns: [
+					{ data: 'a' },
+					{ data: 'b' }
+				],
+				"order": [[ 0, "asc" ]]
+			});
+			
+			// Action on buttons "see row X"
+			jQuery('[data-action="show_row"]').on('click', function() {
+				var e = jQuery(this);
+
+				table.row( '#' + e.data('rowid') ).r_show();
+				// Hightlight
+				jQuery( '#' + e.data('rowid') + ' td' ).css({
+					backgroundColor:'#2ecc71' 
+				});
+			});
+			// Add a row and display it
+			jQuery('[data-action="add_row"]').on('click', function() {
+				r++;
+				table.row.add({
+					'DT_RowId': 'row_' + r,
+					'a': r,
+					'b' : 'B - ' + r + ' (added)'
+				}).draw().r_show();
+				// Hightlight
+				jQuery( '#row_' + r + ' td' ).css({
+					backgroundColor:'#2ecc71' 
+				});
+			});
+			
+			// Edit a row and display it again
+			jQuery('[data-action="edit_row"]').on('click', function() {
+				var el = jQuery(this);
+				var old_data = table.row( '#' + el.data('rowid') ).data();
+
+				table.row( '#' + el.data('rowid') ).data({
+					'DT_RowId': old_data.DT_RowId,
+					'a': old_data.a + 10,
+					'b' : old_data.b
+				}).draw().r_show();
+				// Hightlight
+				jQuery( '#' + el.data('rowid') + ' td' ).css({
+					backgroundColor:'#2ecc71' 
+				});
+			});
+			
+			// Remove hightlight when drawing
+			jQuery('#example_table').on( 'draw.dt', function () {
+				jQuery(this).find('td').removeAttr('style');
+			} );
+		</script>
+    </body>
+</html>
