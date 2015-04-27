@@ -15,8 +15,8 @@ var table = jQuery('#example_table').DataTable();
 
 // Update row and show it after reorder
     
-    table.row( '#row_example' ).data({ [some data] }).r_show();
+    table.row( '#row_example' ).data({ [some data] }).draw().r_show();
 
 // Create a row and show it after drawing
     
-    table.row.add({ [some data] }).r_show();
+    table.row.add({ [some data] }).draw().r_show();
