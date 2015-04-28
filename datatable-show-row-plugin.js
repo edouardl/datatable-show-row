@@ -1,14 +1,15 @@
 /**
  *  This plugin permits to show the right page of DataTable to show the selected row
  *
- *  @name row().r_show()
+ *  @version 1.0
+ *  @name row().show()
  *  @summary See the row in datable by display the right pagination page
  *  @author [Edouard Labre](http://www.edouardlabre.com)
  *
  *  @param {void} a row must be selected
  *
  *  @example
- *    // Add an element to a huge table and go to the right paginate page
+ *    // Add an element to a huge table and go to the right pagination page
  *    var table = $('#example').DataTable();
  *    var new_row = {
  *      DT_RowId: 'row_example',
@@ -16,9 +17,9 @@
  *      value: 'an example row'
  *    };
  *    
- *    table.row.add( new_row ).draw().r_show();
+ *    table.row.add( new_row ).draw().show().draw(false);
  */
-$.fn.dataTable.Api.register('row().r_show()', function() {
+$.fn.dataTable.Api.register('row().show()', function() {
     var page_info = this.table().page.info();
     // Get row index
     var new_row_index = this.index();
@@ -32,7 +33,7 @@ $.fn.dataTable.Api.register('row().r_show()', function() {
     // Find page number
     var page_to_display = Math.floor( row_position / this.table().page.len() );
     // Go to that page
-    this.table().page( page_to_display ).draw( false );
+    this.table().page( page_to_display );
     // Return row object
     return this;
 });
