@@ -7,6 +7,7 @@
  *  @author [Edouard Labre](http://www.edouardlabre.com)
  *
  *  @param {void} a row must be selected
+ *  @returns {DataTables.Api.Rows} DataTables Rows API instance
  *
  *  @example
  *    // Add an element to a huge table and go to the right pagination page
