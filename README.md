@@ -1,7 +1,7 @@
 Show Row : a DataTable plugin
 ==================
 
-This simple plugin works with the new API of the jQuery [DataTables](http://datatables.net) table enhancer.
+This simple plugin works with the new API of the jQuery [DataTables](http://datatables.net) table enhancer (API introduce in version 1.10).
 
 It permits to search a row and display the right page of DataTable to show it. For example after a new row creation or row content update.
 
