@@ -25,6 +25,8 @@ var table = jQuery('#example_table').DataTable();
 
 
 ### Changelog
+Version 1.1
+* Fix the plugin behavior when a DataTable search is performed
 
 Version 1.0
 * Remove the "r_" prefix
